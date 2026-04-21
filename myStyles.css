@@ -97,3 +97,9 @@ body {
     max-width: 100% !important;
     padding: 1.5rem;
 }
+.tableau-section {
+    max-width: 100% !important;
+    margin: 2rem 0 !important;
+    border-radius: 0 !important;
+    padding: 2rem 5% !important;
+}
