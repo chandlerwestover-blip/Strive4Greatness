@@ -13,44 +13,55 @@
         <link href="styles.css" rel="stylesheet" />
         <style>
             :root {
-                --heat-red: #98002E;
-                --heat-black: #000000;
-                --heat-white: #FFFFFF;
+                --cavs-wine: #6F263D;
+                --cavs-gold: #FFB81C;
+                --cavs-navy: #041E42;
             }
+
             body { background-color: #111; }
             .main-content-wrap { background-color: #fff; }
+
+            /* Navbar */
             #mainNav {
                 border-bottom: 1px solid #222;
-                background-color: var(--heat-black) !important;
+                background-color: var(--cavs-navy) !important;
             }
             #mainNav .navbar-brand,
-            #mainNav .navbar-nav > li.nav-item > a.nav-link { color: var(--heat-white) !important; }
+            #mainNav .navbar-nav > li.nav-item > a.nav-link { color: var(--cavs-gold) !important; }
             #mainNav .navbar-brand:hover,
-            #mainNav .navbar-nav > li.nav-item > a.nav-link:hover { color: var(--heat-red) !important; }
-            #mainNav .navbar-toggler { border-color: #555; color: #fff; }
+            #mainNav .navbar-nav > li.nav-item > a.nav-link:hover { color: #fff !important; }
+            #mainNav .navbar-toggler { border-color: #555; color: var(--cavs-gold); }
             #mainNav.is-fixed {
-                background-color: rgba(0,0,0,0.95) !important;
-                border-bottom: 1px solid var(--heat-red) !important;
+                background-color: rgba(4,30,66,0.97) !important;
+                border-bottom: 1px solid var(--cavs-gold) !important;
             }
             #mainNav.is-fixed .navbar-brand,
-            #mainNav.is-fixed .navbar-nav > li.nav-item > a { color: var(--heat-white) !important; }
+            #mainNav.is-fixed .navbar-nav > li.nav-item > a { color: var(--cavs-gold) !important; }
             #mainNav.is-fixed .navbar-brand:hover,
-            #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover { color: var(--heat-red) !important; }
+            #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover { color: #fff !important; }
+
+            /* Button */
             .btn-primary {
-                background-color: var(--heat-red) !important;
-                border-color: var(--heat-red) !important;
+                background-color: var(--cavs-wine) !important;
+                border-color: var(--cavs-wine) !important;
             }
             .btn-primary:hover {
-                background-color: #7a0024 !important;
-                border-color: #7a0024 !important;
+                background-color: #5a1e31 !important;
+                border-color: #5a1e31 !important;
             }
+
+            /* Section headings */
             .section-heading {
-                color: var(--heat-red);
-                border-bottom: 2px solid var(--heat-red);
+                color: var(--cavs-wine);
+                border-bottom: 3px solid var(--cavs-gold);
                 padding-bottom: 0.5rem;
                 margin-bottom: 1rem;
             }
-            a:hover { color: var(--heat-red) !important; }
+
+            /* Links */
+            a:hover { color: var(--cavs-wine) !important; }
+
+            /* Stat cards */
             .stat-cards {
                 display: flex;
                 flex-wrap: wrap;
@@ -60,8 +71,8 @@
             .stat-card {
                 flex: 1 1 120px;
                 text-align: center;
-                background-color: #f8f8f8;
-                border-top: 4px solid var(--heat-red);
+                background-color: var(--cavs-navy);
+                border-top: 4px solid var(--cavs-gold);
                 padding: 1rem 0.5rem;
                 border-radius: 4px;
             }
@@ -70,7 +81,7 @@
                 font-family: 'Open Sans', sans-serif;
                 font-size: 2rem;
                 font-weight: 800;
-                color: var(--heat-red);
+                color: var(--cavs-gold);
                 line-height: 1;
             }
             .stat-card .lbl {
@@ -80,14 +91,16 @@
                 font-weight: 700;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
-                color: #6c757d;
+                color: #fff;
                 margin-top: 0.4rem;
             }
+
+            /* Footer */
             footer {
-                background-color: var(--heat-black);
-                border-top: 3px solid var(--heat-red) !important;
+                background-color: var(--cavs-navy);
+                border-top: 3px solid var(--cavs-gold) !important;
             }
-            footer .small { color: #888 !important; }
+            footer .small { color: #aaa !important; }
         </style>
     </head>
     <body>
