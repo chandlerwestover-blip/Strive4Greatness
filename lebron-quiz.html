@@ -9,100 +9,234 @@
 
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0a1628;
+      background: #1a0533;
       color: #f0f0f0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
     }
 
     header {
+      background: #1a0533;
+      border-bottom: 4px solid #FDB927;
+      padding: 1.25rem 2rem;
       text-align: center;
-      margin-bottom: 2rem;
     }
 
     header h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      color: #f5c518;
+      color: #FDB927;
       letter-spacing: 0.02em;
     }
 
     header p {
-      font-size: 1rem;
-      color: #9aafc7;
-      margin-top: 0.4rem;
+      font-size: 0.95rem;
+      color: #b39dcc;
+      margin-top: 0.3rem;
     }
 
+    /* Difficulty Screen */
+    #difficulty-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease;
+    }
+
+    #difficulty-screen h2 {
+      font-size: 1.5rem;
+      color: #FDB927;
+      margin-bottom: 0.5rem;
+    }
+
+    #difficulty-screen p {
+      color: #b39dcc;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .difficulty-cards {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .diff-card {
+      background: #2d1055;
+      border: 2px solid #4a1f8a;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      text-align: center;
+      width: 180px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .diff-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .diff-card.easy:hover { border-color: #2a9d5c; }
+    .diff-card.medium:hover { border-color: #FDB927; }
+    .diff-card.hard:hover { border-color: #e63946; }
+
+    .diff-card .diff-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .diff-card .diff-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .diff-card .diff-desc { font-size: 0.8rem; color: #b39dcc; }
+
+    .diff-card.easy .diff-name { color: #2a9d5c; }
+    .diff-card.medium .diff-name { color: #FDB927; }
+    .diff-card.hard .diff-name { color: #e63946; }
+
+    /* Quiz Wrap */
     #quiz-wrap {
+      flex: 1;
+      display: none;
+      flex-direction: column;
       width: 100%;
-      max-width: 640px;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2rem;
     }
 
-    #scorebar {
+    #quiz-wrap.active { display: flex; }
+
+    /* Top bar with scorebar + streak */
+    #top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.25rem;
+      gap: 1rem;
+    }
+
+    #scorebar {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 12px;
     }
 
     #progress-track {
       flex: 1;
-      height: 6px;
-      background: #1e3150;
+      height: 8px;
+      background: #2d1055;
       border-radius: 4px;
-      margin: 0 16px;
       overflow: hidden;
     }
 
     #progress-fill {
       height: 100%;
-      background: #f5c518;
+      background: #FDB927;
       border-radius: 4px;
       transition: width 0.4s ease;
     }
 
     .score-pill {
       font-size: 13px;
-      font-weight: 600;
-      color: #9aafc7;
+      font-weight: 700;
+      color: #FDB927;
+      white-space: nowrap;
     }
 
+    /* Streak counter */
+    #streak-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #2d1055;
+      border: 1px solid #4a1f8a;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #b39dcc;
+      white-space: nowrap;
+      transition: all 0.3s;
+    }
+
+    #streak-box.hot {
+      border-color: #FDB927;
+      color: #FDB927;
+      box-shadow: 0 0 12px #FDB92744;
+    }
+
+    #streak-box .streak-fire { font-size: 1rem; }
+
+    /* Difficulty badge */
+    #diff-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    #diff-badge.easy { background: #0e3322; color: #2a9d5c; }
+    #diff-badge.medium { background: #3a2800; color: #FDB927; }
+    #diff-badge.hard { background: #3a1010; color: #e63946; }
+
+    /* Question card with slide animation */
     #question-card {
-      background: #112240;
-      border: 1px solid #1e3a5f;
+      background: #2d1055;
+      border: 1px solid #4a1f8a;
       border-radius: 12px;
       padding: 1.5rem;
       margin-bottom: 0.75rem;
+      flex-shrink: 0;
+      animation: slideIn 0.35s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-40px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-leaving {
+      animation: slideOut 0.3s ease forwards;
     }
 
     #q-num {
-      font-size: 12px;
-      color: #9aafc7;
+      font-size: 11px;
+      color: #b39dcc;
       margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     #q-text {
       font-size: 1.15rem;
       font-weight: 600;
-      color: #eaf0fb;
+      color: #f0ecf8;
       line-height: 1.5;
     }
 
     .stat-tag {
       display: inline-block;
-      font-size: 12px;
-      background: #f5c51822;
-      color: #f5c518;
-      border: 1px solid #f5c51844;
+      font-size: 11px;
+      background: #FDB92722;
+      color: #FDB927;
+      border: 1px solid #FDB92744;
       border-radius: 4px;
       padding: 3px 10px;
       margin-bottom: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     #choices {
@@ -110,37 +244,53 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 1rem;
+      flex-shrink: 0;
     }
 
     .choice-btn {
-      background: #112240;
-      border: 1px solid #1e3a5f;
+      background: #2d1055;
+      border: 1px solid #4a1f8a;
       border-radius: 8px;
-      padding: 14px 16px;
-      font-size: 14px;
+      padding: 1rem 1.1rem;
+      font-size: 1rem;
       font-weight: 500;
-      color: #eaf0fb;
+      color: #f0ecf8;
       cursor: pointer;
       text-align: left;
       line-height: 1.4;
       transition: background 0.15s, border-color 0.15s;
+      min-height: 60px;
     }
 
     .choice-btn:hover:not(:disabled) {
-      background: #1a2f50;
-      border-color: #f5c518;
+      background: #3d1a70;
+      border-color: #FDB927;
     }
 
     .choice-btn.correct {
       background: #0e3322;
       border-color: #2a9d5c;
       color: #6ee09e;
+      animation: correctPop 0.3s ease;
+    }
+
+    @keyframes correctPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
     }
 
     .choice-btn.wrong {
       background: #3a1010;
       border-color: #a32d2d;
       color: #f09595;
+      animation: wrongShake 0.3s ease;
+    }
+
+    @keyframes wrongShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
     }
 
     .choice-btn.reveal {
@@ -152,89 +302,117 @@
     .choice-btn:disabled { cursor: default; }
 
     #feedback-box {
-      min-height: 52px;
-      font-size: 14px;
-      color: #9aafc7;
+      min-height: 60px;
+      font-size: 0.95rem;
+      color: #b39dcc;
       line-height: 1.65;
       padding: 0 0.25rem;
       margin-bottom: 1rem;
+      flex-shrink: 0;
+      animation: fadeIn 0.3s ease;
     }
 
     #next-btn {
       width: 100%;
-      padding: 13px;
-      background: #f5c518;
+      padding: 14px;
+      background: #FDB927;
       border: none;
       border-radius: 8px;
-      color: #0a1628;
-      font-size: 15px;
+      color: #1a0533;
+      font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
       display: none;
       transition: background 0.15s;
+      flex-shrink: 0;
     }
 
-    #next-btn:hover { background: #e0b215; }
+    #next-btn:hover { background: #e0a820; }
 
+    /* Result card */
     #result-card {
-      background: #112240;
-      border: 1px solid #1e3a5f;
+      background: #2d1055;
+      border: 1px solid #4a1f8a;
       border-radius: 12px;
       padding: 2.5rem 2rem;
       text-align: center;
       display: none;
+      flex: 1;
+      animation: fadeIn 0.5s ease;
     }
 
     #result-score {
-      font-size: 64px;
+      font-size: 72px;
       font-weight: 700;
-      color: #f5c518;
+      color: #FDB927;
+      line-height: 1;
     }
 
-    #result-label {
-      font-size: 14px;
-      color: #9aafc7;
-      margin-bottom: 1.5rem;
+    #result-label { font-size: 14px; color: #b39dcc; margin-bottom: 0.5rem; }
+
+    #result-streak {
+      font-size: 13px;
+      color: #FDB927;
+      margin-bottom: 1rem;
+      font-weight: 700;
     }
 
     #result-title {
       font-size: 1.3rem;
       font-weight: 700;
-      color: #eaf0fb;
+      color: #f0ecf8;
       margin-bottom: 0.75rem;
     }
 
     #result-sub {
-      font-size: 15px;
-      color: #9aafc7;
+      font-size: 1rem;
+      color: #b39dcc;
       line-height: 1.65;
       margin-bottom: 2rem;
     }
 
-    #restart-btn {
-      padding: 13px 40px;
-      background: #f5c518;
+    .result-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    #restart-btn, #change-diff-btn {
+      padding: 13px 32px;
       border: none;
       border-radius: 8px;
-      color: #0a1628;
-      font-size: 15px;
+      font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
       transition: background 0.15s;
     }
 
-    #restart-btn:hover { background: #e0b215; }
+    #restart-btn {
+      background: #FDB927;
+      color: #1a0533;
+    }
+
+    #restart-btn:hover { background: #e0a820; }
+
+    #change-diff-btn {
+      background: #2d1055;
+      color: #FDB927;
+      border: 2px solid #FDB927;
+    }
+
+    #change-diff-btn:hover { background: #3d1a70; }
 
     footer {
-      margin-top: 2.5rem;
-      font-size: 12px;
-      color: #3d5470;
       text-align: center;
+      padding: 1rem;
+      font-size: 12px;
+      color: #4a1f8a;
+      border-top: 1px solid #2d1055;
     }
+
+    footer a { color: #FDB927; text-decoration: none; }
+    footer a:hover { color: #fff; }
 
     @media (max-width: 480px) {
       #choices { grid-template-columns: 1fr; }
-      header h1 { font-size: 1.5rem; }
+      header h1 { font-size: 1.4rem; }
+      .difficulty-cards { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -245,11 +423,42 @@
     <p>10 questions. How well do you know the King?</p>
   </header>
 
+  <!-- Difficulty Selection Screen -->
+  <div id="difficulty-screen">
+    <h2>Choose Your Difficulty</h2>
+    <p>How well do you really know LeBron?</p>
+    <div class="difficulty-cards">
+      <div class="diff-card easy" onclick="startQuiz('easy')">
+        <div class="diff-icon">🏀</div>
+        <div class="diff-name">Easy</div>
+        <div class="diff-desc">Basic LeBron facts. Good starting point.</div>
+      </div>
+      <div class="diff-card medium" onclick="startQuiz('medium')">
+        <div class="diff-icon">👑</div>
+        <div class="diff-name">Medium</div>
+        <div class="diff-desc">For real fans who follow the game.</div>
+      </div>
+      <div class="diff-card hard" onclick="startQuiz('hard')">
+        <div class="diff-icon">🔥</div>
+        <div class="diff-name">Hard</div>
+        <div class="diff-desc">True GOAT historians only.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Screen -->
   <div id="quiz-wrap">
-    <div id="scorebar">
-      <span class="score-pill" id="q-counter">1 / 10</span>
-      <div id="progress-track"><div id="progress-fill" style="width:10%"></div></div>
-      <span class="score-pill" id="score-display">0 pts</span>
+    <div id="top-bar">
+      <div id="scorebar">
+        <span class="score-pill" id="q-counter">1 / 10</span>
+        <div id="progress-track"><div id="progress-fill" style="width:10%"></div></div>
+        <span class="score-pill" id="score-display">0 pts</span>
+      </div>
+      <div id="streak-box">
+        <span class="streak-fire">🔥</span>
+        <span id="streak-count">0 streak</span>
+      </div>
+      <span id="diff-badge">Easy</span>
     </div>
 
     <div id="question-card">
@@ -265,94 +474,277 @@
     <div id="result-card">
       <div id="result-score"></div>
       <div id="result-label">out of 10</div>
+      <div id="result-streak"></div>
       <div id="result-title"></div>
       <div id="result-sub"></div>
-      <button id="restart-btn">Play again</button>
+      <div class="result-btns">
+        <button id="restart-btn">Play again</button>
+        <button id="change-diff-btn">Change difficulty</button>
+      </div>
     </div>
   </div>
 
   <footer>
-    <a href="index.html" style="color:#3d5470; text-decoration:underline;">Back to main site</a>
+    <a href="index.html">&larr; Back to main site</a>
   </footer>
 
   <script>
-    const questions = [
-      {
-        q: "LeBron James was selected with which overall pick in the 2003 NBA Draft?",
-        choices: ["1st", "2nd", "3rd", "5th"],
-        answer: 0,
-        fact: "The Cleveland Cavaliers selected LeBron #1 overall in 2003, right out of St. Vincent–St. Mary High School in Akron, Ohio.",
-        tag: "Draft"
-      },
-      {
-        q: "How many NBA championships has LeBron James won as of 2024?",
-        choices: ["2", "3", "4", "5"],
-        answer: 2,
-        fact: "LeBron won titles in 2012 and 2013 with Miami, 2016 with Cleveland, and 2020 with the Lakers — four total.",
-        tag: "Championships"
-      },
-      {
-        q: "LeBron surpassed whose all-time NBA scoring record in February 2023?",
-        choices: ["Michael Jordan", "Kobe Bryant", "Kareem Abdul-Jabbar", "Karl Malone"],
-        answer: 2,
-        fact: "LeBron passed Kareem Abdul-Jabbar's record of 38,387 points on February 7, 2023, becoming the all-time leading scorer in NBA history.",
-        tag: "Records"
-      },
-      {
-        q: "Which team did LeBron NOT play for during his NBA career?",
-        choices: ["Cleveland Cavaliers", "Miami Heat", "Chicago Bulls", "Los Angeles Lakers"],
-        answer: 2,
-        fact: "LeBron played for Cleveland (2003–2010, 2014–2018), Miami (2010–2014), and the Lakers (2018–present). He never played for Chicago.",
-        tag: "Teams"
-      },
-      {
-        q: "LeBron James grew up in which city?",
-        choices: ["Columbus, OH", "Cincinnati, OH", "Akron, OH", "Cleveland, OH"],
-        answer: 2,
-        fact: "LeBron was born and raised in Akron, Ohio. His hometown roots are central to his identity — he famously promised to bring a title to Northeast Ohio.",
-        tag: "Background"
-      },
-      {
-        q: "In what year did LeBron win his first NBA MVP award?",
-        choices: ["2007", "2008", "2009", "2010"],
-        answer: 2,
-        fact: "LeBron won his first MVP in 2009 with the Cleveland Cavaliers, beginning a run of four total MVPs (2009, 2010, 2012, 2013).",
-        tag: "Awards"
-      },
-      {
-        q: "LeBron's famous 'Decision' in 2010 announced he was leaving Cleveland for which team?",
-        choices: ["Los Angeles Lakers", "Boston Celtics", "Chicago Bulls", "Miami Heat"],
-        answer: 3,
-        fact: "'I'm going to take my talents to South Beach' — LeBron announced his move to the Miami Heat in a televised special, joining Dwyane Wade and Chris Bosh.",
-        tag: "Moments"
-      },
-      {
-        q: "Which nickname is LeBron James most famously known by?",
-        choices: ["The King", "The Black Mamba", "The Answer", "The Truth"],
-        answer: 0,
-        fact: "LeBron is known as 'King James' or 'The King.' The other nicknames belong to Kobe Bryant (Black Mamba), Allen Iverson (The Answer), and Paul Pierce (The Truth).",
-        tag: "Nicknames"
-      },
-      {
-        q: "LeBron's famous block in Game 7 of the 2016 Finals sealed a win against which opponent?",
-        choices: ["Golden State Warriors", "San Antonio Spurs", "Oklahoma City Thunder", "Boston Celtics"],
-        answer: 0,
-        fact: "LeBron's chase-down block of Andre Iguodala in the final minutes of Game 7 is one of the most iconic plays in Finals history. Cleveland won 93–89.",
-        tag: "Moments"
-      },
-      {
-        q: "LeBron James attended which high school, famously covered by national media before he was drafted?",
-        choices: ["Oak Hill Academy", "Findlay Prep", "St. Vincent–St. Mary", "Montverde Academy"],
-        answer: 2,
-        fact: "St. Vincent–St. Mary High School in Akron, OH — LeBron's games were so hyped they were broadcast on ESPN. His team was nationally ranked all four years.",
-        tag: "Background"
-      }
-    ];
+    const allQuestions = {
+      easy: [
+        {
+          q: "LeBron James was selected with which overall pick in the 2003 NBA Draft?",
+          choices: ["1st", "2nd", "3rd", "5th"],
+          answer: 0,
+          fact: "The Cleveland Cavaliers selected LeBron #1 overall in 2003, right out of St. Vincent–St. Mary High School in Akron, Ohio.",
+          tag: "Draft"
+        },
+        {
+          q: "How many NBA championships has LeBron James won?",
+          choices: ["2", "3", "4", "5"],
+          answer: 2,
+          fact: "LeBron won titles in 2012 and 2013 with Miami, 2016 with Cleveland, and 2020 with the Lakers — four total.",
+          tag: "Championships"
+        },
+        {
+          q: "LeBron James grew up in which city?",
+          choices: ["Columbus, OH", "Cincinnati, OH", "Akron, OH", "Cleveland, OH"],
+          answer: 2,
+          fact: "LeBron was born and raised in Akron, Ohio. His hometown roots are central to his identity.",
+          tag: "Background"
+        },
+        {
+          q: "Which nickname is LeBron James most famously known by?",
+          choices: ["The King", "The Black Mamba", "The Answer", "The Truth"],
+          answer: 0,
+          fact: "LeBron is known as 'King James.' The other nicknames belong to Kobe Bryant, Allen Iverson, and Paul Pierce.",
+          tag: "Nicknames"
+        },
+        {
+          q: "LeBron's 'Decision' in 2010 announced he was leaving Cleveland for which team?",
+          choices: ["Los Angeles Lakers", "Boston Celtics", "Chicago Bulls", "Miami Heat"],
+          answer: 3,
+          fact: "'I'm going to take my talents to South Beach' — LeBron announced his move to the Miami Heat.",
+          tag: "Moments"
+        },
+        {
+          q: "What position does LeBron James primarily play?",
+          choices: ["Point Guard", "Shooting Guard", "Small Forward", "Center"],
+          answer: 2,
+          fact: "LeBron is listed as a Small Forward, though his versatility allows him to play multiple positions.",
+          tag: "Basketball"
+        },
+        {
+          q: "Which team did LeBron win his first NBA championship with?",
+          choices: ["Cleveland Cavaliers", "Miami Heat", "Los Angeles Lakers", "Chicago Bulls"],
+          answer: 1,
+          fact: "LeBron won his first championship with the Miami Heat in 2012, defeating the Oklahoma City Thunder.",
+          tag: "Championships"
+        },
+        {
+          q: "LeBron attended which high school?",
+          choices: ["Oak Hill Academy", "Findlay Prep", "St. Vincent–St. Mary", "Montverde Academy"],
+          answer: 2,
+          fact: "St. Vincent–St. Mary High School in Akron, OH — LeBron's games were broadcast on ESPN nationally.",
+          tag: "Background"
+        },
+        {
+          q: "What is LeBron's jersey number with the Lakers?",
+          choices: ["6", "23", "32", "3"],
+          answer: 1,
+          fact: "LeBron wears #23 with the Lakers, honoring Michael Jordan. He previously wore #6 with Miami and briefly with LA.",
+          tag: "Basketball"
+        },
+        {
+          q: "LeBron surpassed whose all-time NBA scoring record in 2023?",
+          choices: ["Michael Jordan", "Kobe Bryant", "Kareem Abdul-Jabbar", "Karl Malone"],
+          answer: 2,
+          fact: "LeBron passed Kareem Abdul-Jabbar's record of 38,387 points on February 7, 2023.",
+          tag: "Records"
+        }
+      ],
+      medium: [
+        {
+          q: "In what year did LeBron win his first NBA MVP award?",
+          choices: ["2007", "2008", "2009", "2010"],
+          answer: 2,
+          fact: "LeBron won his first MVP in 2009 with the Cleveland Cavaliers, beginning a run of four total MVPs.",
+          tag: "Awards"
+        },
+        {
+          q: "LeBron's famous block in Game 7 of the 2016 Finals was against which player?",
+          choices: ["Stephen Curry", "Klay Thompson", "Andre Iguodala", "Draymond Green"],
+          answer: 2,
+          fact: "LeBron's chase-down block of Andre Iguodala with 1:50 left is one of the most iconic plays in Finals history.",
+          tag: "Moments"
+        },
+        {
+          q: "How many consecutive NBA Finals appearances did LeBron make from 2011 to 2018?",
+          choices: ["6", "7", "8", "9"],
+          answer: 2,
+          fact: "LeBron appeared in 8 consecutive NBA Finals from 2011 to 2018, matching the Russell-era Celtics.",
+          tag: "Records"
+        },
+        {
+          q: "LeBron opened the I PROMISE School in which city?",
+          choices: ["Cleveland", "Miami", "Los Angeles", "Akron"],
+          answer: 3,
+          fact: "LeBron opened the I PROMISE School in his hometown of Akron, Ohio in 2018 for at-risk children.",
+          tag: "Off-Court"
+        },
+        {
+          q: "Which team did Cleveland defeat in the 2016 NBA Finals?",
+          choices: ["San Antonio Spurs", "Golden State Warriors", "Oklahoma City Thunder", "Boston Celtics"],
+          answer: 1,
+          fact: "Cleveland defeated the Golden State Warriors 4-3, coming back from a 3-1 deficit.",
+          tag: "Championships"
+        },
+        {
+          q: "How many Finals MVP awards has LeBron won?",
+          choices: ["2", "3", "4", "5"],
+          answer: 2,
+          fact: "LeBron has won 4 Finals MVP awards — 2012, 2013, 2016, and 2020 — second only to Michael Jordan's 6.",
+          tag: "Awards"
+        },
+        {
+          q: "LeBron and his son Bronny made history in 2024 by becoming the first what in NBA history?",
+          choices: ["Brothers to play together", "Father-son duo to play together", "Relatives to win a championship", "Family members drafted in the same year"],
+          answer: 1,
+          fact: "LeBron and Bronny James became the first father-son duo to play together in an NBA game in 2024.",
+          tag: "History"
+        },
+        {
+          q: "How many All-Star selections has LeBron received?",
+          choices: ["18", "20", "22", "24"],
+          answer: 2,
+          fact: "LeBron has been selected to 22 NBA All-Star Games — the most in NBA history.",
+          tag: "Awards"
+        },
+        {
+          q: "LeBron was inducted into the Hall of Fame in 2025 as a member of which team?",
+          choices: ["1992 Dream Team", "2008 Redeem Team", "2012 Olympic Team", "2016 Olympic Team"],
+          answer: 1,
+          fact: "LeBron was inducted into the Naismith Hall of Fame in 2025 as a member of the 2008 'Redeem Team' that won gold in Beijing.",
+          tag: "Awards"
+        },
+        {
+          q: "What series deficit did Cleveland overcome in the 2016 NBA Finals?",
+          choices: ["1-2", "2-3", "1-3", "0-3"],
+          answer: 2,
+          fact: "Cleveland trailed 3-1 and became the first team in NBA Finals history to overcome that deficit.",
+          tag: "History"
+        }
+      ],
+      hard: [
+        {
+          q: "LeBron became the all-time scoring leader on February 7, 2023 against which team?",
+          choices: ["Golden State Warriors", "Oklahoma City Thunder", "Memphis Grizzlies", "Utah Jazz"],
+          answer: 1,
+          fact: "LeBron surpassed Kareem's record against the Oklahoma City Thunder on February 7, 2023 in Los Angeles.",
+          tag: "Records"
+        },
+        {
+          q: "How many points did LeBron score in Game 7 of the 2016 NBA Finals?",
+          choices: ["27", "35", "41", "45"],
+          answer: 2,
+          fact: "LeBron scored 27 points but also had 11 rebounds, 11 assists, 3 steals and 3 blocks — a historic performance.",
+          tag: "Stats"
+        },
+        {
+          q: "LeBron led both teams in points, assists, steals and blocks in the 2016 Finals — the only player to ever do that. True or false?",
+          choices: ["True", "False", "Only in the regular season", "Only in Game 7"],
+          answer: 0,
+          fact: "LeBron is the only player in NBA Finals history to lead both teams in all four of those categories in a single series.",
+          tag: "Records"
+        },
+        {
+          q: "In which season did LeBron average his career-high in points per game?",
+          choices: ["2005-06", "2007-08", "2012-13", "2017-18"],
+          answer: 1,
+          fact: "LeBron averaged 30.0 PPG in the 2007-08 season, his career high, and also led the league in scoring.",
+          tag: "Stats"
+        },
+        {
+          q: "LeBron is the only player in NBA history with over 40,000 points AND over how many assists?",
+          choices: ["8,000", "9,000", "10,000", "11,000"],
+          answer: 3,
+          fact: "LeBron is the only player ever with 40,000+ points and 11,000+ assists — combining scoring and playmaking at the highest level.",
+          tag: "Records"
+        },
+        {
+          q: "What did LeBron say to the media after Cleveland won in 2016?",
+          choices: ["'Cleveland, this is for you!'", "'I promised this city'", "'Nothing is given'", "'Cleveland, we did it!'"],
+          answer: 0,
+          fact: "'Cleveland, this is for you!' — LeBron's iconic words after ending Cleveland's 52-year championship drought.",
+          tag: "Moments"
+        },
+        {
+          q: "LeBron holds the record for the most consecutive double-digit scoring games. Approximately how many?",
+          choices: ["800", "1,000", "1,297", "1,500"],
+          answer: 2,
+          fact: "LeBron holds the NBA record with 1,297 consecutive games with double-digit points scored.",
+          tag: "Records"
+        },
+        {
+          q: "LeBron won the 2024 Olympics MVP in which city?",
+          choices: ["Tokyo", "Beijing", "Rio de Janeiro", "Paris"],
+          answer: 3,
+          fact: "LeBron won the 2024 Olympics MVP at the Paris Games, where Team USA won gold for the 3rd time with him.",
+          tag: "Olympics"
+        },
+        {
+          q: "How many total regular season wins does LeBron have — more than any player in NBA history?",
+          choices: ["900+", "1,000+", "1,048", "1,200+"],
+          answer: 2,
+          fact: "LeBron has 1,048 regular season wins, second only to Kareem Abdul-Jabbar among all-time leaders.",
+          tag: "Records"
+        },
+        {
+          q: "LeBron's career Player Efficiency Rating (PER) of 26.88 is the highest in NBA history. Who is second?",
+          choices: ["Michael Jordan", "Shaquille O'Neal", "Wilt Chamberlain", "Nikola Jokic"],
+          answer: 1,
+          fact: "Michael Jordan is second in career PER behind LeBron, whose 26.88 is the highest all-time.",
+          tag: "Stats"
+        }
+      ]
+    };
 
-    let current = 0, score = 0, answered = false;
-    const shuffled = questions.slice().sort(() => Math.random() - 0.5);
+    let current = 0, score = 0, streak = 0, maxStreak = 0, answered = false;
+    let shuffled = [], difficulty = 'easy';
+
+    function startQuiz(diff) {
+      difficulty = diff;
+      shuffled = allQuestions[diff].slice().sort(() => Math.random() - 0.5);
+      current = 0; score = 0; streak = 0; maxStreak = 0;
+
+      document.getElementById('difficulty-screen').style.display = 'none';
+      const qw = document.getElementById('quiz-wrap');
+      qw.classList.add('active');
+
+      const badge = document.getElementById('diff-badge');
+      badge.textContent = diff.charAt(0).toUpperCase() + diff.slice(1);
+      badge.className = 'diff-badge ' + diff;
+
+      render();
+    }
+
+    function updateStreak() {
+      const box = document.getElementById('streak-box');
+      const cnt = document.getElementById('streak-count');
+      cnt.textContent = streak + ' streak';
+      if (streak >= 3) {
+        box.classList.add('hot');
+      } else {
+        box.classList.remove('hot');
+      }
+    }
 
     function render() {
+      const card = document.getElementById('question-card');
+      card.classList.remove('card-leaving');
+      card.style.animation = 'none';
+      card.offsetHeight; // reflow
+      card.style.animation = '';
+
       const q = shuffled[current];
       document.getElementById('q-counter').textContent = (current + 1) + ' / ' + shuffled.length;
       document.getElementById('progress-fill').style.width = ((current + 1) / shuffled.length * 100) + '%';
@@ -363,9 +755,14 @@
       document.getElementById('feedback-box').textContent = '';
       document.getElementById('next-btn').style.display = 'none';
       answered = false;
+      updateStreak();
 
       const choicesEl = document.getElementById('choices');
       choicesEl.innerHTML = '';
+      choicesEl.style.animation = 'none';
+      choicesEl.offsetHeight;
+      choicesEl.style.animation = 'slideIn 0.35s ease';
+
       q.choices.forEach(function(c, i) {
         const btn = document.createElement('button');
         btn.className = 'choice-btn';
@@ -384,27 +781,40 @@
 
       if (idx === q.answer) {
         score++;
+        streak++;
+        if (streak > maxStreak) maxStreak = streak;
         btns[idx].classList.add('correct');
-        document.getElementById('feedback-box').textContent = 'Correct! ' + q.fact;
+        document.getElementById('feedback-box').textContent = '✅ Correct! ' + q.fact;
       } else {
+        streak = 0;
         btns[idx].classList.add('wrong');
         btns[q.answer].classList.add('reveal');
-        document.getElementById('feedback-box').textContent = 'Not quite. ' + q.fact;
+        document.getElementById('feedback-box').textContent = '❌ Not quite. ' + q.fact;
       }
 
       document.getElementById('score-display').textContent = score + ' pts';
+      updateStreak();
+
       const nextBtn = document.getElementById('next-btn');
       nextBtn.style.display = 'block';
-      nextBtn.textContent = current < shuffled.length - 1 ? 'Next question' : 'See my results';
+      nextBtn.textContent = current < shuffled.length - 1 ? 'Next question →' : 'See my results →';
     }
 
     document.getElementById('next-btn').onclick = function() {
-      current++;
-      if (current >= shuffled.length) {
-        showResult();
-      } else {
-        render();
-      }
+      const card = document.getElementById('question-card');
+      const choices = document.getElementById('choices');
+      card.classList.add('card-leaving');
+      choices.style.animation = 'slideOut 0.3s ease forwards';
+
+      setTimeout(function() {
+        current++;
+        if (current >= shuffled.length) {
+          showResult();
+        } else {
+          card.classList.remove('card-leaving');
+          render();
+        }
+      }, 300);
     };
 
     function showResult() {
@@ -414,45 +824,62 @@
       document.getElementById('feedback-box').style.display = 'none';
       document.getElementById('next-btn').style.display = 'none';
       document.getElementById('scorebar').style.display = 'none';
+      document.getElementById('streak-box').style.display = 'none';
+      document.getElementById('diff-badge').style.display = 'none';
 
-      var title, sub;
+      const diffLabel = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+      let title, sub;
       if (score === 10) {
         title = "Perfect score — you're the GOAT of LeBron trivia!";
-        sub = "10 out of 10. You know LeBron's career better than most analysts. Respect.";
+        sub = "10 out of 10 on " + diffLabel + " mode. Flawless. King would be proud.";
       } else if (score >= 8) {
         title = "Strong ring!";
-        sub = score + " out of 10. You clearly follow LeBron closely. Just a couple details slipped past you.";
+        sub = score + " out of 10 on " + diffLabel + ". You clearly follow LeBron closely.";
       } else if (score >= 6) {
         title = "Not bad, rookie.";
-        sub = score + " out of 10. A solid performance — but a true LeBron fan can do better. Play again?";
+        sub = score + " out of 10 on " + diffLabel + ". A solid performance — but a true fan can do better.";
       } else if (score >= 4) {
         title = "Needs more film study.";
-        sub = score + " out of 10. LeBron has a long career — there's a lot to learn. Give it another shot!";
+        sub = score + " out of 10 on " + diffLabel + ". There's a lot to learn. Give it another shot!";
       } else {
         title = "Yikes — LeBron would be disappointed.";
-        sub = score + " out of 10. Time to watch some highlights and come back stronger.";
+        sub = score + " out of 10 on " + diffLabel + ". Time to watch some highlights and come back stronger.";
       }
 
       document.getElementById('result-score').textContent = score;
+      document.getElementById('result-streak').textContent = '🔥 Best streak: ' + maxStreak + ' in a row';
       document.getElementById('result-title').textContent = title;
       document.getElementById('result-sub').textContent = sub;
       document.getElementById('result-card').style.display = 'block';
     }
 
     document.getElementById('restart-btn').onclick = function() {
-      current = 0;
-      score = 0;
-      shuffled.sort(() => Math.random() - 0.5);
+      shuffled = allQuestions[difficulty].slice().sort(() => Math.random() - 0.5);
+      current = 0; score = 0; streak = 0; maxStreak = 0;
+
       document.getElementById('question-card').style.display = 'block';
       document.getElementById('stat-tag-wrap').style.display = 'block';
       document.getElementById('choices').style.display = 'grid';
       document.getElementById('feedback-box').style.display = 'block';
       document.getElementById('result-card').style.display = 'none';
       document.getElementById('scorebar').style.display = 'flex';
+      document.getElementById('streak-box').style.display = 'flex';
+      document.getElementById('diff-badge').style.display = 'block';
       render();
     };
 
-    render();
+    document.getElementById('change-diff-btn').onclick = function() {
+      document.getElementById('result-card').style.display = 'none';
+      document.getElementById('question-card').style.display = 'block';
+      document.getElementById('stat-tag-wrap').style.display = 'block';
+      document.getElementById('choices').style.display = 'grid';
+      document.getElementById('feedback-box').style.display = 'block';
+      document.getElementById('scorebar').style.display = 'flex';
+      document.getElementById('streak-box').style.display = 'flex';
+      document.getElementById('diff-badge').style.display = 'block';
+      document.getElementById('quiz-wrap').classList.remove('active');
+      document.getElementById('difficulty-screen').style.display = 'flex';
+    };
   </script>
 
 </body>
