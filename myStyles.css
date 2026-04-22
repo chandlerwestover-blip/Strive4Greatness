@@ -127,3 +127,7 @@ body {
     color: #FDB927;
     text-decoration: none;
 }
+.section img {
+    display: block;
+    margin: 1rem auto;
+}
