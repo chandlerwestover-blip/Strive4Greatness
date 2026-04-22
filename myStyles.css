@@ -91,10 +91,15 @@ body {
     padding: 2rem;
     background-color: #2d1055;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tableau-outer {
     width: 100%;
+    display: flex;
+    justify-content: center;
     overflow-x: auto;
 }
 
@@ -127,6 +132,7 @@ body {
     color: #FDB927;
     text-decoration: none;
 }
+
 .section img {
     display: block;
     margin: 1rem auto;
